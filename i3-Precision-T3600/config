@@ -171,6 +171,9 @@ mode "$mode_launcher" {
     bindsym Return mode "default"
 }
 
+# map `mod` to both Windows key and right Menu key
+exec_always --no-startup-id xmodmap -e "keysym Menu = Super_R"
+
 
 
 # Configure 5px of space between windows and to the screen edges.
