@@ -1,0 +1,71 @@
+(defcfg
+  ;; input  (device-file "/dev/input/by-path/pci-0000:02:00.0-usb-0:5.3:1.0-event-kbd")
+  input  (device-file "/dev/input/by-id/usb-SINO_WEALTH_Gaming_KB-event-kbd")
+  output (uinput-sink "My KMonad output")
+  fallthrough true
+  )
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12        ssrq slck pause
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  ins  home pgup  nlck kp/  kp*  kp-
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \     del  end  pgdn  kp7  kp8  kp9  kp+
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret                        kp4  kp5  kp6
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft                 up         kp1  kp2  kp3  kprt
+  lctl lmet lalt           spc            ralt  cmp   rmet rctl          left down rght  kp0  kp.
+)
+
+
+(defalias
+  ;; layer-toggle
+  fn0 (layer-switch qwerty) ;; Bind fn0 to a button that switches to a layer
+  fn1 (layer-switch lower)
+  fn2  (layer-switch raise) 
+  fn3 (layer-toggle qwerty) ;; Bind fn3 to a button that toggles to a layer
+  fn4 (layer-toggle lower)
+  fn5 (layer-toggle raise)
+
+  tm (tap-next-press ret @fn0)
+  tlow (tap-hold 150 spc @fn4)
+  tqwer (tap-hold 150 spc @fn3)
+
+  kil  C-A-del                ;; Bind kil to a button that Ctrl-Alt-deletes
+)
+
+(deflayer qwerty 
+  esc @fn1 @fn2  f3   f4   f5   f6   f7   f8   f9   f10  f11  f12        ssrq slck pause
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  ins  home pgup  nlck kp/  kp*  kp-
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \     del  end  pgdn  kp7  kp8  kp9  kp+
+  esc  a    s    d    f    g    h    j    k    l    ;    '    ret                        kp4  kp5  kp6
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft                 up         kp1  kp2  kp3  kprt
+  lctl lalt lmet          @tlow           rmet _   ralt  rctl            left down rght  kp0  kp.
+)
+
+
+
+
+(deflayer lower 
+  esc @fn0 @fn0  f3   f4   f5   f6   f7   f8   f9   f10  f11  f12        ssrq slck pause
+  grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10    -    =  bspc  ins  home pgup  nlck kp/  kp*  kp-
+  grv  !    @    #    $    %    ^    &    *    \(    \)    [    ]    \   del  end  pgdn  kp7  kp8  kp9  kp+
+  ~    1    2    3    4    5    6    7    8    9    0    '    ret                        kp4  kp5  kp6
+  lsft \_   -    +    [    {    }    ]    ,    .    =    rsft                 up         kp1  kp2  kp3  kprt
+  lctl lalt lmet         @tqwer           rmet _   ralt  rctl            left down rght  kp0  kp.
+)
+
+(deflayer raise 
+  esc @fn0  @fn0 f3   f4   f5   f6   f7   f8   f9   f10  f11  f12        ssrq slck pause
+  grv  f1   f2   f3   f4   f5   f6   f7   f8   f9    f10  -    =    bspc ins  home pgup   nlck kp/  kp*  kp-
+  grv  !    @    #    $    %    ^    &    *    \(    \)   [    ]    \    del  end  pgdn   kp7  kp8  kp9  kp+
+  ~    1    2    3    4    5    left down up   rght ;    '    ret                         kp4  kp5  kp6
+  lsft z    x    c    v    b    n    m    ,    .     /    rsft                 up         kp1  kp2  kp3  kprt
+  lctl lalt lmet           @tqwer         rmet _   ralt   rctl           left down rght   kp0  kp.
+)
+
+(deflayer mylayer
+  _    _    _    _    _    _    _    _    _    _    _    _    _          _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _    _     _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _                          _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _                    _          _    _    _    _
+  _    _    _              _              _    _    _    _               _    _    _     _    _   
+)
