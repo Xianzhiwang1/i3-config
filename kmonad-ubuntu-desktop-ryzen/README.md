@@ -36,3 +36,21 @@ then the left hand could easily type
 and upon releasing the space key, we automatically gets back to the `qwerty` layer.
 
 Hence, holding the space bar using our thumbs acts like Shift, but with different layers and keys.
+
+use the following for `systemd`
+
+
+
+# /etc/systemd/system/kmonad.service
+[Unit]
+Description=kmonad keyboard config
+
+[Service]
+Restart=always
+RestartSec=3
+ExecStart=/usr/bin/kmonad /etc/kmonad/keymap.kbd
+Nice=-20
+
+[Install]
+WantedBy=default.target
+
