@@ -69,30 +69,13 @@ esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del wkup
   tqwer (tap-hold 150 spc @fn3)
 
   kil  C-A-del                ;; Bind kil to a button that Ctrl-Alt-deletes
-
-  ;; 200 ms for the tapping term, home row mods
-    sft_a (tap-hold-next-release 200 a lsft)
-    ctl_s (tap-hold-next-release 200 s lctl)
-    alt_d (tap-hold-next-release 200 d lalt)
-    met_f (tap-hold-next-release 200 f lmet)
-
-    sft_; (tap-hold-next-release 200 ; rsft)
-    ctl_l (tap-hold-next-release 200 l rctl)
-    alt_k (tap-hold-next-release 200 k lalt)
-    met_j (tap-hold-next-release 200 j rmet)
-
-    lft_u (tap-hold-next-release 200 u left)
-    dwn_i (tap-hold-next-release 200 i down)
-    up_o (tap-hold-next-release 200 o up)
-    rght_p (tap-hold-next-release 200 p rght)
 )
 
 (deflayer qwerty
  esc   @fn1 @fn2 f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del wkup
   grv  1    2    3    4    5    6    7    8    9    0    -     =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [     ]    \
-  esc  @sft_a    @ctl_s    @alt_d    @met_f    g    h    @met_j    @alt_k    @ctl_l    @sft_;    '    ret
-  ;; esc  a    s    d    f    g    h    j    k    l    ;    '          ret
+  esc  a    s    d    f    g    h    j    k    l    ;    '          ret
   lsft z    x    c    v    b    n    m    ,    .    /          up   rsft
   lctl _  lalt lmet          @tlow            rmet  rctl left down rght 
                                                                
@@ -104,23 +87,19 @@ esc  @fn0   @fn0   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del wkup
   grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10    -    =  bspc  
   grv  !    @    #    $    %    ^    &    *    \(    \)    [    ]    \   
   ~    1    2    3    4    5    6    7    8    9    0    '         ret     
-  lsft \_   -    +    [    {    }    ]    |    \    =         up   rsft             
+  lsft \_   -    +    [    {    }    ]    ,    .    =          up   rsft             
   lctl _  lalt lmet          @tqwer            rmet  rctl left down rght 
                                                                
 )
 
-  ;; raise
-  ;; grv  !    @    #    $    %    ^    &    *    \(    \)    [    ]    \   
-  ;; ~    1    2    3    4    5    left down up   rght ;    '         ret 
-  ;; lsft \_   -    +    [    {    }    ]    ,    .    =          up   rsft             
 
 (deflayer raise 
 esc  @fn0   @fn0   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del wkup
   grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10    -    =  bspc  
-  tab  q        w        e        r        t    y    @lft_u    @dwn_i    @up_o    @rght_p    [    ]    \     
-  esc  @sft_a    @ctl_s    @alt_d    @met_f    g    h    j    k    l    ;    '    ret    
-  lsft z    x    c    v    b    n    m    ,    .    /         up    rsft   
-  lctl _  lalt lmet          @tlow            rmet  rctl left down rght 
+  grv  !    @    #    $    %    ^    &    *    \(    \)    [    ]    \   
+  ~    1    2    3    4    5    left down up   rght ;    '         ret 
+  lsft \_   -    +    [    {    }    ]    ,    .    =          up   rsft             
+  lctl _  lalt lmet          @tqwer            rmet  rctl left down rght 
                                                                
 )
 
