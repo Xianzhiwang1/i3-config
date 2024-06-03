@@ -1,0 +1,12 @@
+# /etc/systemd/system/kmonad.service
+[Unit]
+Description=kmonad keyboard config
+
+[Service]
+Restart=always
+RestartSec=3
+ExecStart=/home/xianzhiwang/.local/bin/kmonad /home/xianzhiwang/.config/kmonad/config.kbd
+Nice=-20
+
+[Install]
+WantedBy=default.target
