@@ -1,0 +1,127 @@
+
+    
+#| --------------------------------------------------------------------------
+
+                         KMonad: ISO ThinkPad T430 Template
+
+   This file contains US and `defsrc' configurations for a ThinkPad T430
+   with an ISO keyboard.  Copy out the `defsrc' layer to start your own
+   keyboard configuration.  Copy out the `deflayer' template to easily start
+   a new layer with matching `transparent' buttons.
+
+(deflayer name
+       _    _    _
+_    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _     _
+  _    _    _    _    _    _    _    _    _    _    _    _    _     _
+  _    _    _    _    _    _    _    _    _    _    _    _          _
+  _    _    _    _    _    _    _    _    _    _    _               _
+  _    _    _    _              _              _    _    _     _    _    _
+                                                               _    _    _
+)
+;; apple keyboard
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  
+  grv  1    2    3    4    5    6    7    8    9    0    -     =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '      ret
+  lsft z    x    c    v    b    n    m    ,    .    /     up rsft
+  fn   lctl lmet lalt           spc            ralt rmet  left  down rght 
+)
+  -------------------------------------------------------------------------- |#
+
+(defcfg
+  ;; this is a comment
+  ;; input  (device-file "/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.0-event-kbd")
+  ;; usb-Apple_Inc._Magic_Keyboard_F0T033301EYJ1XPA7-event-if00  
+  ;; usb-Apple_Inc._Magic_Keyboard_F0T033301EYJ1XPA7-if01-event-kbd 
+  ;; input  (device-file "/dev/input/by-id/usb-Razer_Razer_Blade-event-kbd")
+  ;;
+  input  (device-file "/dev/input/by-id/usb-Apple_Inc._Magic_Keyboard_F0T033301EYJ1XPA7-if01-event-kbd")
+  output (uinput-sink "My KMonad output")
+  fallthrough true
+  allow-cmd false
+  )
+
+(defsrc
+esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   wkup
+  grv  1    2    3    4    5    6    7    8    9    0    -     =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '          ret
+  lsft z    x    c    v    b    n    m    ,    .    /          up   rsft
+  cmp lctl lmet lalt           spc            ralt  rctl left down rght 
+)
+
+
+
+
+
+
+(defalias
+  ;; layer-toggle
+  fn0 (layer-switch qwerty) ;; Bind fn0 to a button that switches to a layer
+  fn1 (layer-switch lower)
+  fn2  (layer-switch raise) 
+  fn3 (layer-toggle qwerty) ;; Bind fn3 to a button that toggles to a layer
+  fn4 (layer-toggle lower)
+  fn5 (layer-toggle raise)
+
+  tm (tap-next-press ret @fn0)
+  tlow (tap-hold 150 spc @fn4)
+  tqwer (tap-hold 150 spc @fn3)
+
+  kil  C-A-del                ;; Bind kil to a button that Ctrl-Alt-deletes
+
+  ;; 200 ms for the tapping term, home row mods
+    sft_a (tap-hold-next-release 200 a lsft)
+    ctl_s (tap-hold-next-release 200 s lctl)
+    alt_d (tap-hold-next-release 200 d lalt)
+    met_f (tap-hold-next-release 200 f lmet)
+
+    sft_; (tap-hold-next-release 200 ; rsft)
+    ctl_l (tap-hold-next-release 200 l rctl)
+    alt_k (tap-hold-next-release 200 k lalt)
+    met_j (tap-hold-next-release 200 j rmet)
+
+    lft_u (tap-hold-next-release 200 u left)
+    dwn_i (tap-hold-next-release 200 i down)
+    up_o (tap-hold-next-release 200 o up)
+    rght_p (tap-hold-next-release 200 p rght)
+)
+
+(deflayer qwerty
+ esc   @fn1 @fn2 f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  wkup
+  grv  1    2    3    4    5    6    7    8    9    0    -     =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]    \
+  esc  @sft_a    @ctl_s    @alt_d    @met_f    g    h    @met_j    @alt_k    @ctl_l    @sft_;    '    ret
+  ;; esc  a    s    d    f    g    h    j    k    l    ;    '          ret
+  lsft z    x    c    v    b    n    m    ,    .    /          up   rsft
+  _  lctl lalt lmet          @tlow            rmet  rctl left down rght 
+)
+
+
+(deflayer lower 
+esc  @fn0   @fn0   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  wkup
+  grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10    -    =  bspc  
+  grv  !    @    #    $    %    ^    &    *    \(    \)    [    ]    \   
+  ~    1    2    3    4    5    6    7    8    9    0    '         ret     
+  lsft \_   -    +    [    {    }    ]    |    \    =         up   rsft             
+  _ lctl  lalt lmet          @tqwer            rmet  rctl left down rght 
+)
+
+  ;; raise
+  ;; grv  !    @    #    $    %    ^    &    *    \(    \)    [    ]    \   
+  ;; ~    1    2    3    4    5    left down up   rght ;    '         ret 
+  ;; lsft \_   -    +    [    {    }    ]    ,    .    =          up   rsft             
+
+(deflayer raise 
+esc  @fn0   @fn0   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  wkup
+  grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10    -    =  bspc  
+  tab  q        w        e        r        t    y    @lft_u    @dwn_i    @up_o    @rght_p    [    ]    \     
+  esc  @sft_a    @ctl_s    @alt_d    @met_f    g    h    j    k    l    ;    '    ret    
+  lsft z    x    c    v    b    n    m    ,    .    /         up    rsft   
+  _ lctl  lalt lmet          @tlow            rmet  rctl left down rght 
+)
+
+
+

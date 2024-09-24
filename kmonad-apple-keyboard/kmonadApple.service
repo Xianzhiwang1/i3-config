@@ -1,0 +1,14 @@
+# /etc/systemd/system/kmonadDellKbd.service
+[Unit]
+Description=kmonad keyboard config Apple bluetooth keyboard 
+
+[Service]
+Restart=always
+RestartSec=3
+ExecStart=/home/xianzhiwang/.local/bin/kmonad /home/xianzhiwang/.config/kmonad/configApple.kbd
+Nice=-20
+
+[Install]
+WantedBy=default.target
+
+
